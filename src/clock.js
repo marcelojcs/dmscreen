@@ -1,13 +1,13 @@
-import Reacet from 'react';
+import React from 'react';
 var s = 0;
 var m = 0;
 var h = 0;
 function manageClock(){
-  if (s>60){
+  if (s>59){
     m+=1
     s=0;
   }
-  if (m>60){
+  if (m>59){
     h+=1
     m=0;
   }
@@ -19,6 +19,15 @@ setInterval(() => {
 }, 1000);
 class Clock expands React.component{
 
+	render(){
+		return(
+			 <div className="jumbotron">
+		
+				{h+':'+m+':'+s}
+
+			</div>
+		);
+	}
 
 
 }
