@@ -52,7 +52,6 @@ class Clock extends React.Component{
 
   mountTimer(){
     if (this.state.intervalID === null){
-      console.log('ini')
       var intervalID = setInterval(this.handleTimer, 1000);
       this.setState({intervalID: intervalID});
     }
