@@ -17,7 +17,7 @@ setInterval(() => {
   manageClock();
   console.log(h+':'+m+':'+s);
 }, 1000);
-class Clock expands React.component{
+class Clock extends React.Component{
 
 	render(){
 		return(
