@@ -27,15 +27,7 @@ function manageClock(){
     m=0;
   }
 }
-/*function ticker(){
 
-  setInterval(() => {
-    s++;
-    manageClock();
-    console.log(h+':'+m+':'+s);
-  }, 1000);
-
-}*/
 class Clock extends React.Component{
   constructor(props){
     super(props);
@@ -48,7 +40,29 @@ class Clock extends React.Component{
 
     this.mountTimer=this.mountTimer.bind(this);
     this.handleTimer=this.handleTimer.bind(this);
+    this.pauseTimer=this.pauseTimer.bind(this);
+    this.clearTimer=this.clearTimer.bind(this);
   }
+	clearTimer(event){
+		if (this.state.intervalID  === null){
+				s = 0;
+				m = 0;
+				h = 0;
+			    this.setState({s:s});
+    		    this.setState({m:m});
+                this.setState({h:h});
+			
+			}
+
+	}
+	
+	pauseTimer(event){
+		if(this.state.intervalID != null){
+			clearInterval(this.state.intervalID);
+			this.setState({intervalID:null});
+
+		}
+	}
 
   mountTimer(){
     if (this.state.intervalID === null){
@@ -69,9 +83,10 @@ class Clock extends React.Component{
       <div>
 			 <div className="h1 p-3 bg-dark text-white">
 				   {appendZero(this.state.h)+':'+appendZero(this.state.m)+':'+appendZero(this.state.s)}
-        </div>
-        <button className="btn" onClick={this.mountTimer}>START</button>
-
+      	  </div>
+      	  <button className="btn" onClick={this.mountTimer}>START</button>
+      	  <button className="btn" onClick={this.pauseTimer}>PAUSE</button>
+      	  <button className="btn" onClick={this.clearTimer}>CLEAR</button>
     	</div>
 		);
 	}
