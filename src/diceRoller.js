@@ -19,6 +19,7 @@ class DiceRoller extends React.Component{
 		}
 		this.rollSingleDice=this.rollSingleDice.bind(this);
 		this.handleRollStr=this.handleRollStr.bind(this);
+		this.rollStrDice=this.rollStrDice.bind(this);
 	}
 	handleRollStr(event){
 		this.setState({rollStr: event.target.value});
@@ -31,6 +32,20 @@ class DiceRoller extends React.Component{
 	}
 
 	rollStrDice(dieStr){
+			if(multiRoll.test(dieStr)){
+				let theRoll = dieStr.split('d');
+				let total = 0;
+				let rtrn = "Roll "+dieStr+": ";
+				for(let n=0; n< theRoll[0]; n++){
+					let x = roll(theRoll[1]);
+					rtrn += x+" ";
+					total += x;
+				}
+				let bRolls = this.state.rolls;
+				bRolls.push(rtrn+" = "+total);
+				bRolls.push(<br/>);
+				this.setState({rolls : bRolls});
+			} 
 
 	}
 
@@ -51,7 +66,7 @@ class DiceRoller extends React.Component{
 					<button onClick={()=> this.rollSingleDice(100)} className="btn btn-warning h2">d100</button>
 				</div>
 				<div>
-					<input type="text" onChange={this.handleRollStr}/><button onClick={()=> this.rollSingleDice(100)} className="btn btn-warning h2">ROLL</button>
+					<input type="text" onChange={this.handleRollStr}/><button onClick={()=> this.rollStrDice(this.state.rollStr)} className="btn btn-warning h2">ROLL</button>
 
 				</div>
 			</div>
