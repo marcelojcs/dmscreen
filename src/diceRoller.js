@@ -46,9 +46,28 @@ class DiceRoller extends React.Component{
 				bRolls.push(<br/>);
 				this.setState({rolls : bRolls});
 			} 
-
+			else if(multiRollMod.test(dieStr)){
+				console.log("valid formula");
+				let op = "+";
+				if (dieStr.indexOf(op) === -1){op="-"}
+				console.log("operator "+op);
+				let splt = dieStr.split(op);
+				console.log("split "+splt);
+				let theRoll = splt[0].split('d');
+				console.log("roll " +theRoll);
+				let total = eval("0"+op+splt[1]);
+				let rtrn = "Roll "+dieStr+": ";
+				for(let n=0; n< theRoll[0]; n++){
+					let x = roll(theRoll[1]);
+					rtrn += x+" ";
+					total += x;
+				}
+				let bRolls = this.state.rolls;
+				bRolls.push(rtrn+op+" "+splt[1]+" = "+total);
+				bRolls.push(<br/>);
+				this.setState({rolls : bRolls});
+		}
 	}
-
 
 	render(){
 		return(
