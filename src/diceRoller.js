@@ -7,7 +7,7 @@ function roll(die){
 
 }
 var multiRollMod = /\b(\d{1,3})d(4|6|8|10|12|20|100)(\+|\-)(\d{1,3})\b/;
-var multiRoll = /\b(\d{1,3})d(4|6|8|10|12|20|100)\b/;
+var multiRoll = /(\d{1,3})d(4|6|8|10|12|20|100)$/;
 
 class DiceRoller extends React.Component{
 	constructor(props){
@@ -32,43 +32,33 @@ class DiceRoller extends React.Component{
 	}
 
 	rollStrDice(dieStr){
-		console.log("init "+dieStr);
+
 		if(multiRollMod.test(dieStr) === true){
-				console.log("valid formula");
+
 				let op = "+";
-				console.log("1st operator "+op);
-				if (dieStr.indexOf(op) === -1){op="-"}
-				console.log("2nd operator "+op);
+				if (dieStr.indexOf(op) === -1){op="-"};
 				let splt = dieStr.split(op);
-				console.log("split "+splt);
 				let theRoll = splt[0].split('d');
-				console.log("roll " +theRoll);
 				let total = eval("0"+op+splt[1]);
-				console.log("operator "+op);
 				let rtrn = "Roll "+dieStr+": ";
 				for(let n=0; n< theRoll[0]; n++){
 					let x = roll(theRoll[1]);
-					console.log('pushing '+x);
+
 					rtrn += x+" ";
 					total += x;
 				}
 				let bRolls = this.state.rolls;
 				bRolls.push(rtrn+''+op+" "+splt[1]+" = "+total);
 				bRolls.push(<br/>);
-				console.log("3rd operator "+op);
-				console.log(" roll 2 "+theRoll);
-				console.log("2nd operator "+op);
 				this.setState({rolls : bRolls});
 			} else if(multiRoll.test(dieStr) === true){
 
-						console.log("valid 1");
+
 						let theRoll = dieStr.split('d');
 						let total = 0;
 						let rtrn = "Roll "+dieStr+": ";
 						for(let n=0; n< theRoll[0]; n++){
-							console.log('working with '+theRoll);
 							let x = roll(theRoll[1]);
-							console.log('pushing '+x);
 							rtrn += x+" ";
 							total += x;
 						}
@@ -77,7 +67,6 @@ class DiceRoller extends React.Component{
 						bRolls.push(<br/>);
 						this.setState({rolls : bRolls});
 					}else {
-			console.log('invalid');
 		}
 	}
 
