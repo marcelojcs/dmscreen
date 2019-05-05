@@ -51,6 +51,7 @@ class DiceRoller extends React.Component{
 				bRolls.push(rtrn+''+op+" "+splt[1]+" = "+total);
 				bRolls.push(<br/>);
 				this.setState({rolls : bRolls});
+				this.refs.rollInput.value = '';
 			} else if(multiRoll.test(dieStr) === true){
 
 
@@ -66,7 +67,8 @@ class DiceRoller extends React.Component{
 						bRolls.push(rtrn+" = "+total);
 						bRolls.push(<br/>);
 						this.setState({rolls : bRolls});
-					}else {
+						this.refs.rollInput.value = '';
+					}else {this.refs.rollInput.value = 'Invalid formula';
 		}
 	}
 
@@ -86,7 +88,7 @@ class DiceRoller extends React.Component{
 					<button onClick={()=> this.rollSingleDice(100)} className="btn btn-dark h2">d100</button>
 				</div>
 				<div>
-					<input type="text" onChange={this.handleRollStr}/><button onClick={()=> this.rollStrDice(this.state.rollStr)} className="btn btn-dark h2">ROLL</button>
+					<input type="text" ref="rollInput" onChange={this.handleRollStr}/><button onClick={()=> this.rollStrDice(this.state.rollStr)} className="btn btn-dark h2">ROLL</button>
 
 				</div>
 			</div>
