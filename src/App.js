@@ -1,6 +1,7 @@
 import React from 'react';
-import Clock from  './clock'
+import Clock from  './clock';
 import DiceRoller from './diceRoller';
+import Players from './players';
 import './App.css';
 
 class App extends React.Component{
@@ -9,7 +10,8 @@ class App extends React.Component{
 
   	     <Clock />
   		<DiceRoller />
-	
+      <Players />
+
 	    </div>
 	  );
 	}
