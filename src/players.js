@@ -1,5 +1,6 @@
 import React from 'react';
 var plyrs = localStorage.getItem('plyrs');
+plyrs = JSON.parse(plyrs);
 class Players extends React.Component{
   constructor(props){
     super(props);
@@ -20,17 +21,44 @@ class Players extends React.Component{
 
     }
     this.handleNewForm = this.handleNewForm.bind(this);
+    this.openNewForm = this.openNewForm.bind(this);
   }
-  handleNewForm(event){
-    this.setState({plyrs: event.target.value});
-    localStorage.setItem('plyrs', this.state.plyrs);
-  }
+  openNewForm(){
+	this.setState({addNew : true})
+	}
+  handleNewForm(){
+  	let newPlyr = this.state.newPlayer;
+    this.setState({newPlayer: {
+		name: this.refs.newName.vlaue,
+        hp: this.refs.newHp.vlaue,
+        maxHp: this.refs.newMaxHp.vlaue,
+        ac: this.refs.newAc.vlaue,
+        dex: this.refs.newDex.vlaue,
+        con: this.refs.newCon.vlaue,
+        int: this.refs.newInt.vlaue,
+        cha: this.refs.newCha.vlaue,
+        wis: this.refs.newWis.vlaue,
+		}});
+    this.state.plyrs.push(this.state.newPlayer);
+    localStorage.setItem('plyrs', JSON.stringfy(this.state.plyrs));
+	this.setState({newPlayer: newPlyr});
+    this.setState({ addNew: false});
+ }
   render(){
     return(
       <div>
-              {this.state.plyrs}
-
-      <div><input type="text" onChange={this.handleNewForm}/> <button clssName="bnt bnt-dark h2">Add</button> </div>
+        <div>
+        	{(()=>{return("fill me later");})()}
+		</div>
+		<div>
+			{(()=>{
+				if(!this.state.addNew){ return(<button className="btn btn-dark h2" onClick={this.openNewForm}>Add</button>);
+				}else{
+					return(<div>Hahahahahah</div>);
+					
+				}
+			})()}
+		</div>
       </div>
     );
   }
