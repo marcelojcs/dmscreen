@@ -1,21 +1,11 @@
 import React from 'react';
 var plyrs = localStorage.getItem('plyrs');
-plyrs = JSON.parse(plyrs);
+if(plyrs==null){plyrs=[];}
+else{plyrs = JSON.parse(plyrs);}
 class Players extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      newPlayer:{
-        name : "",
-        hp: 0,
-        maxHp: 0,
-        ac: 0,
-        dex : 0,
-        con: 0,
-        int: 0,
-        cha: 0,
-        wis : 0,
-      },
       plyrs: plyrs,
       addNew: false,
 
@@ -32,21 +22,23 @@ class Players extends React.Component{
 	this.setState({addNew : false})
 	}
   handleNewForm(){
-  	let newPlyr = this.state.newPlayer;
-    this.setState({newPlayer: {
-		name: this.refs.newName.vlaue,
-        hp: this.refs.newHp.vlaue,
-        maxHp: this.refs.newMaxHp.vlaue,
-        ac: this.refs.newAc.vlaue,
-        dex: this.refs.newDex.vlaue,
-        con: this.refs.newCon.vlaue,
-        int: this.refs.newInt.vlaue,
-        cha: this.refs.newCha.vlaue,
-        wis: this.refs.newWis.vlaue,
-		}});
-    this.state.plyrs.push(this.state.newPlayer);
-    localStorage.setItem('plyrs', JSON.stringfy(this.state.plyrs));
-	this.setState({newPlayer: newPlyr});
+  let tp = this.state.plyrs;
+    let newPlayer = {
+		name: this.refs.newName.value,
+        hp: this.refs.newHp.value,
+        maxHp: this.refs.newMaxHp.value,
+        str: this.refs.newStr.value,
+        ac: this.refs.newAc.value,
+        dex: this.refs.newDex.value,
+        con: this.refs.newCon.value,
+        int: this.refs.newInt.value,
+        cha: this.refs.newCha.value,
+        wis: this.refs.newWis.value,
+		};
+    tp.push(newPlayer);
+    console.log(newPlayer);
+    this.setState({plyrs: tp});
+    localStorage.setItem('plyrs', JSON.stringify(this.state.plyrs));
     this.setState({ addNew: false});
  }
   rmPlyr(index){
@@ -61,7 +53,6 @@ class Players extends React.Component{
     return(
       <div>
         <div>
-<<<<<<< HEAD
         	{(()=>{let res =[];
 
              for(let x=0; x<this.state.plyrs.length; x ++){
@@ -84,15 +75,11 @@ class Players extends React.Component{
              }
              return res;
            })()}
-=======
-        	{(()=>{return("fill me later");})()}
->>>>>>> parent of 0869ce84... players updater
 		</div>
 		<div>
 			{(()=>{
 				if(!this.state.addNew){ return(<button className="btn h2" onClick={this.openNewForm}>Add New</button>);
 				}else{
-<<<<<<< HEAD
 					return(<div>
             <div><b>Name: </b> <input type="text" ref="newName" /> </div>
             <div><b>HP: </b> <input type="number" ref="newHp" /> </div>
@@ -110,11 +97,7 @@ class Players extends React.Component{
 
             </div>);
 
-=======
-					return(<div>Hahahahahah</div>);
-					
->>>>>>> parent of 0869ce84... players updater
-				}
+}
 			})()}
 		</div>
       </div>
