@@ -1,11 +1,8 @@
 import React from 'react';
+import coreFuncs from '../funcs/corefuncs';
 
-function roll(die){
-	let result;
-	result = Math.floor(Math.random()*die)+1;
-	return result;
+const roll = coreFuncs.rollDie;
 
-}
 var multiRollMod = /\b(\d{1,3})d(4|6|8|10|12|20|100)(\+|\-)(\d{1,3})\b/;
 var multiRoll = /(\d{1,3})d(4|6|8|10|12|20|100)$/;
 

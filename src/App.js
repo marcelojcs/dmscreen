@@ -1,8 +1,8 @@
 import React from 'react';
-import Clock from  './clock';
-import DiceRoller from './diceRoller';
-import Players from './players';
-import Overlay from './overlay';
+import Clock from  './comps/clock';
+import DiceRoller from './comps/diceRoller';
+import Players from './comps/players';
+import Overlay from './comps/overlay';
 import './App.css';
 
 class App extends React.Component{
