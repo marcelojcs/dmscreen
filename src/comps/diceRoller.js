@@ -17,6 +17,10 @@ class DiceRoller extends React.Component{
 		this.rollSingleDice=this.rollSingleDice.bind(this);
 		this.handleRollStr=this.handleRollStr.bind(this);
 		this.rollStrDice=this.rollStrDice.bind(this);
+		this.clearRolls = this.clearRolls.bind(this);
+	}
+	clearRolls(){
+		this.setState({rolls : []});
 	}
 	handleRollStr(event){
 		this.setState({rollStr: event.target.value});
@@ -85,7 +89,7 @@ class DiceRoller extends React.Component{
 					<button onClick={()=> this.rollSingleDice(100)} className="btn btn-dark h2">d100</button>
 				</div>
 				<div>
-					<input type="text" ref="rollInput" onChange={this.handleRollStr}/><button onClick={()=> this.rollStrDice(this.state.rollStr)} className="btn btn-dark h2">ROLL</button>
+					<input type="text" ref="rollInput" onChange={this.handleRollStr}/><button onClick={()=> this.rollStrDice(this.state.rollStr)} className="btn btn-dark h2">ROLL</button> <button onClick={this.clearRolls} className="btn h3">CLEAR</button>
 
 				</div>
 			</div>
