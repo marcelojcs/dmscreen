@@ -10,8 +10,9 @@ class Notes extends React.Component {
 		super(props);
 		this.state = {
 			notes : notes,
-		}
+		};
 		this.saveNote = this.saveNote.bind(this);
+		this.refreshNotes = this.refreshNotes.bind(this);
 	}
 
 	saveNote(){
@@ -21,8 +22,14 @@ class Notes extends React.Component {
 				text: this.refs.noteText.value
 		});
 		this.setState({notes: newNotes});
-		localStorage.setItem('notes',JSON.stringify(this.state.notes))
-		this.refs.noteText.value = 'New Note'
+		localStorage.setItem('notes',JSON.stringify(this.state.notes));
+		this.refs.noteText.value = 'New Note';
+		this.refs.noteTtl.value = 'Note Title';
+
+	}
+
+	refreshNotes(){
+		this.setState({notes: JSON.parse(localStorage.getItem('notes'))});
 
 	}
 
@@ -30,20 +37,20 @@ class Notes extends React.Component {
 
 		return(
 			<div>
-				<div>	{()=>{
+				<div>	{(()=>{
 						let res = [];
+						let count = 0;
 						for(let note of this.state.notes){
-							res.push(<div>
-								<Note note={note} index={notes.indexOf(note)}/>
-						</div>);
+							res.push(<Note note={note} refresh={this.refreshNotes} index={count} key={count} />);
+							count ++;
 
 					}
 					return res;
 
-				}}
+				})()}
 			</div>
 			<div>
-				<input type="text" ref="noteTtl" />
+				<input type="text" ref="noteTtl" defaultValue="Note Title" />
 			</div>
 				<textarea ref="noteText">
 					New Note
