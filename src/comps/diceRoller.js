@@ -1,10 +1,10 @@
 import React from 'react';
 import coreFuncs from '../funcs/corefuncs';
 
-const roll = coreFuncs.rollDie;
+const roll = coreFuncs.dice.roll;
+const validate = coreFuncs.dice.validate;
+const validateMod = coreFuncs.dice.validateMod;
 
-var multiRollMod = /\b(\d{1,3})d(4|6|8|10|12|20|100)(\+|\-)(\d{1,3})\b/;
-var multiRoll = /(\d{1,3})d(4|6|8|10|12|20|100)$/;
 
 class DiceRoller extends React.Component{
 	constructor(props){
@@ -30,7 +30,7 @@ class DiceRoller extends React.Component{
 
 	rollStrDice(dieStr){
 
-		if(multiRollMod.test(dieStr) === true){
+		if(validateMod(dieStr)){
 
 				let op = "+";
 				if (dieStr.indexOf(op) === -1){op="-"};
@@ -49,7 +49,7 @@ class DiceRoller extends React.Component{
 				bRolls.push(<br/>);
 				this.setState({rolls : bRolls});
 				this.refs.rollInput.value = '';
-			} else if(multiRoll.test(dieStr) === true){
+			} else if(validate(dieStr)){
 
 
 						let theRoll = dieStr.split('d');

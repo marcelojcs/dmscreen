@@ -1,7 +1,8 @@
 import React from 'react';
-var plyrs = localStorage.getItem('plyrs');
-if(plyrs==null){plyrs=[];}
-else{plyrs = JSON.parse(plyrs);}
+import coreFuncs from '../funcs/corefuncs';
+
+
+var plyrs = coreFuncs.storage.init('plyrs')
 class Players extends React.Component{
   constructor(props){
     super(props);
