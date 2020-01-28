@@ -1,20 +1,18 @@
 import React from 'react';
-import coreFuncs from '../funcs/corefuncs'
-
-
-var allNotes = coreFuncs.storage.init('notes');
 
 class Note extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            note: this.props.note,
+            allNotes: this.props.allNotes,
+            note: this.props.allNotes[this.props.index],
             edit: false,
         };
         this.swapEdit = this.swapEdit.bind(this);
         this.saveNote = this.saveNote.bind(this);
         this.deleteNote = this.deleteNote.bind(this);
     }
+
 
     swapEdit(){
 
@@ -29,22 +27,28 @@ class Note extends React.Component {
           text: this.refs.noteTxt.value
         };
         this.setState({note: newNote});
-        let newNotes = allNotes;
+        let newNotes = this.props.allNotes;
         newNotes[this.props.index] = newNote;
         localStorage.setItem('notes',JSON.stringify(newNotes));
         this.swapEdit();
 
 
+
     }
 
     deleteNote(){
-      let newNotes = allNotes;
+      let newNotes = this.props.allNotes;
       newNotes.splice(this.props.index, 1);
       localStorage.setItem('notes',JSON.stringify(newNotes));
       this.props.refresh();
     }
 
+    componentWillReceiveProps(nextProps){
+      if(nextProps.allNotes !== this.props.allNotes){
+        this.setState({allNotes: nextProps.allNotes});
+      }
 
+    }
 
     render(){
         return((()=>{

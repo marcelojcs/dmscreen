@@ -30,6 +30,7 @@ class Notes extends React.Component {
 
 	refreshNotes(){
 		this.setState({notes: JSON.parse(localStorage.getItem('notes'))});
+		this.forceUpdate();
 
 	}
 
@@ -41,7 +42,7 @@ class Notes extends React.Component {
 						let res = [];
 						let count = 0;
 						for(let note of this.state.notes){
-							res.push(<Note note={note} refresh={this.refreshNotes} index={count} key={count} />);
+							res.push(<Note allNotes={this.state.notes} refresh={this.refreshNotes} index={count} key={count} />);
 							count ++;
 
 					}
