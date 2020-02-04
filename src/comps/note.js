@@ -45,7 +45,11 @@ class Note extends React.Component {
 
     componentWillReceiveProps(nextProps){
       if(nextProps.allNotes !== this.props.allNotes){
-        this.setState({allNotes: nextProps.allNotes});
+        this.setState({
+          allNotes: nextProps.allNotes,
+          note: nextProps.allNotes[this.props.index]
+        });
+
       }
 
     }
